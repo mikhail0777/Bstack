@@ -32,14 +32,24 @@ Overall, I am quite happy with the performance. I did not expect to be beating S
 
 # Usage
 
+## Features & Architecture
+
+Bstack features a modern, portfolio-grade architecture designed for developer speed and execution efficiency:
+
+* **Monorepo Workspaces**: Manages client, server, and playground components under a unified workspace. Setup requires only a single `npm install` at the root.
+* **Bstack Developer CLI**: Run `npm run dev` at the root. It spins up the backend server, watches JSS files, and auto-rebuilds JSS templates and Rollup client bundles on the fly.
+* **True Server-Side Rendering (SSR)**: Dynamic page resolution fetches request context and URL query parameters at runtime, dynamically instantiating page components and executing them on every request.
+* **Live Reloading**: During development, the Node server clears the module require cache on request, reflecting layout and script edits instantly on browser refresh without restarting the server.
+* **Microtask Reactivity Batching**: Client state updates are queued and flushed at the end of the microtask execution block (using a scheduler queue). Multiple synchronous state updates trigger only a single layout repaint, preventing DOM thrashing.
+
 ## Setup
 
-To run:
+To run development mode:
 
 1. Clone the repo
-2. Run `npm install` in the root directory (this installs dependencies for all workspaces, including the playground, client-lib, and server-lib)
-3. Navigate to the playground: `cd playground`
-4. Run the development build: `npm run rebuild-dist`
+2. Run `npm install` in the root directory (installs all workspace and CLI dependencies)
+3. Run `npm run dev` at the project root to start the auto-compiling watcher and backend server.
+4. Visit `http://localhost:8000`
 
 Continue to replicate js-framework-benchmark tests:
 
@@ -51,4 +61,4 @@ Continue to replicate js-framework-benchmark tests:
 
 ## Development Docs
 
-These will be published once, and if, the stack is completed. For now, refering to the playground example should provide enough insight to create basic applications.
+These will be published once, and if, the stack is completed. For now, referring to the playground example should provide enough insight to create basic applications.
