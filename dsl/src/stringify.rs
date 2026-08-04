@@ -9,7 +9,7 @@ impl Stringify for Component {
         match self.target {
             Target::CLIENT_ROOT => {
                 format!(
-                    "import {{ hydrate }} from 'a-stack-client';
+                    "import {{ hydrate }} from 'Bstack-client';
                     {}
                     hydrate();
                     ",
@@ -18,7 +18,7 @@ impl Stringify for Component {
             }
             Target::CLIENT_COMP => {
                 format!(
-                    "import {{ Component }} from 'a-stack-client';
+                    "import {{ Component }} from 'Bstack-client';
                     {}
         
                     export default class {} extends Component {{
@@ -40,8 +40,8 @@ impl Stringify for Component {
             },
             Target::SERVER => {
                 format!(
-                    "const {{ Component }} = require('a-stack-server');
-                    {}
+                    "const {{ Component }} = require('Bstack-server');
+                    {}"
         
                     class {} extends Component {{
                         constructor(props) {{

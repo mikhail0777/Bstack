@@ -407,7 +407,7 @@ class Hello extends Component {
                         // TITLE
                         this.Element("div", { class: "col-md-6" }, [
                             this.Element("h1", {}, [
-                                this.Text("A-Stack (non-keyed)")
+                                this.Text("Bstack (non-keyed)")
                             ])
                         ]),
 

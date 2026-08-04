@@ -1,4 +1,4 @@
-import { hydrate } from 'a-stack-client';
+import { hydrate } from 'Bstack-client';
                     export {default as Hello }from './Hello.mjs'
                     hydrate();
                     

@@ -1,4 +1,4 @@
-const { Component } = require('a-stack-server');
+const { Component } = require('Bstack-server');
                     
         
                     class Pages extends Component {

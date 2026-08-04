@@ -1,4 +1,4 @@
-import { Component } from 'a-stack-client';
+import { Component } from 'Bstack-client';
                     
         
                     export default class Hello extends Component {

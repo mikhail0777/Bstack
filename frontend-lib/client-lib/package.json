@@ -1,5 +1,5 @@
 {
-    "name": "a-stack-client",
+    "name": "Bstack-client",
     "type": "module",
     "main": "dist/bundle.js",
     "author": {
