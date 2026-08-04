@@ -6,5 +6,11 @@
     "frontend-lib/client-lib",
     "frontend-lib/server-lib",
     "dev-lib"
-  ]
+  ],
+  "scripts": {
+    "dev": "node ./cli/bin.js"
+  },
+  "devDependencies": {
+    "chokidar": "^5.0.0"
+  }
 }
