@@ -77,7 +77,8 @@ const loadClientJS = (path) => {
 
     console.log("rollup:\t", SRC_FOLDER + origin, "\t=>", DIST_FOLDER + target);
     exec(
-        `rollup -c -f es -i ${SRC_FOLDER + origin} -o ${DIST_FOLDER + target}`,
+        `npx rollup -c -f es -i ${SRC_FOLDER + origin} -o ${DIST_FOLDER + target}`,
+        { cwd: process.cwd() },
         (err, _, stderr) => { if (PRINT_ERR && !!err) console.error(stderr); }
     );
 
