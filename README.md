@@ -36,18 +36,17 @@ Overall, I am quite happy with the performance. I did not expect to be beating S
 
 To run:
 
-1. [clone the repo]
-2. cd frontend-lib
-3. npm i
-4. npm run play
-5. [develop away!]
+1. Clone the repo
+2. Run `npm install` in the root directory (this installs dependencies for all workspaces, including the playground, client-lib, and server-lib)
+3. Navigate to the playground: `cd playground`
+4. Run the development build: `npm run rebuild-dist`
 
 Continue to replicate js-framework-benchmark tests:
 
 1. Clone and follow the README of https://github.com/krausest/js-framework-benchmark. (Make sure to use Chrome v116 rather than v100)
-2. Copy our folder /benchmark-results/Bstack/
-    Note: This is a slight modification of frontend-lib/playground/dist/
-3. Paste the folder into krausest's frameworks/non-keyed/
+2. Copy our folder `/benchmark-results/Bstack/`
+    Note: This is a slight modification of `playground/dist/`
+3. Paste the folder into krausest's `frameworks/non-keyed/`
 4. Follow krausest's instructions for benching individual frameworks and compiling results into the tables seen above.
 
 ## Development Docs

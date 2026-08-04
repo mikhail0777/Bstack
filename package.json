@@ -1,0 +1,10 @@
+{
+  "name": "Bstack-monorepo",
+  "private": true,
+  "workspaces": [
+    "playground",
+    "frontend-lib/client-lib",
+    "frontend-lib/server-lib",
+    "dev-lib"
+  ]
+}
