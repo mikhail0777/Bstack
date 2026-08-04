@@ -63,6 +63,15 @@ Continue to replicate js-framework-benchmark tests:
 
 Based on the run results against the industry-standard `js-framework-benchmark` suite, **Bstack** demonstrates elite execution speed and memory optimization:
 
+### Summary Comparison Table
+The table below displays the **geometric mean of all factors** (performance slowdown and memory footprint allocation ratios) relative to the baseline Vanilla JS implementation (lower is better, where 1.00 is Vanilla JS baseline):
+
+| Metric | Vanilla JS | Bstack | Svelte v4.0.0 | Vue v3.3.4 | React v18.2.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Performance (Duration)** | 1.03 | **1.08** | 1.22 | 1.28 | 1.68 |
+| **Memory Allocation** | 1.00 | **1.55** | 1.44 | 1.81 | 2.51 |
+
+
 ### 1. Performance (Duration in ms)
 * **Vanilla JS Match**: Bstack achieves a geometric mean score of **1.08** relative to vanilla JS, meaning it has only an **8%** overhead over raw DOM manipulation.
 * **Outperforming Svelte, Vue, and React**:
