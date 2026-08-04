@@ -5,6 +5,24 @@ function possiblyChanged(prev, curr) {
         && typeof curr === 'object'); // object -> object: possibly changed.
 }
 
+const queue = new Set();
+let isPending = false;
+function flushQueue() {
+    while (queue.size > 0) {
+        const list = Array.from(queue);
+        queue.clear();
+        list.forEach(r => r.run());
+    }
+    isPending = false;
+}
+function queueReactive(r) {
+    queue.add(r);
+    if (!isPending) {
+        isPending = true;
+        Promise.resolve().then(flushQueue);
+    }
+}
+
 class ReactiveObject {
     constructor(cb, deps) {
         this.callback = cb;
@@ -37,7 +55,7 @@ class ReactiveObject {
         this.value = this.callback(...args);
         // recurse on children if possible change detected.
         if (possiblyChanged(prevValue, this.value)) {
-            this.reactives.forEach(r => r.run());
+            this.reactives.forEach(r => queueReactive(r));
         }
         this.wasCalled = false;
     }
@@ -111,7 +129,7 @@ class StateObject {
             ? update(this.value)
             : update;
         if (possiblyChanged(prevValue, this.value)) {
-            this.reactives.forEach(r => r.run());
+            this.reactives.forEach(r => queueReactive(r));
         }
     }
 }

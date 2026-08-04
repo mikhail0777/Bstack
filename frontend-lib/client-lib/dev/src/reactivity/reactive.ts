@@ -1,5 +1,6 @@
 import StateObject from "./state.js";
 import possiblyChanged from "./possiblyChanged.js";
+import { queueReactive } from "./scheduler.js";
 
 export default class ReactiveObject {
     deps:       Array<ReactiveObject | StateObject>;    // parents: arg dependencies of callback.
@@ -50,7 +51,7 @@ export default class ReactiveObject {
 
         // recurse on children if possible change detected.
         if (possiblyChanged(prevValue, this.value)) {
-            this.reactives.forEach(r => r.run());
+            this.reactives.forEach(r => queueReactive(r));
         }
 
         this.wasCalled = false;

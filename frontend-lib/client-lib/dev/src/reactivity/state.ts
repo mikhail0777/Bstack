@@ -1,5 +1,6 @@
 import ReactiveObject from "./reactive";
 import possiblyChanged from "./possiblyChanged";
+import { queueReactive } from "./scheduler.js";
 
 export default class StateObject {
     value:      any;                    // value: current value of the state.
@@ -24,7 +25,7 @@ export default class StateObject {
                      ? update(this.value)
                      : update;
         if (possiblyChanged(prevValue, this.value)) {
-            this.reactives.forEach(r => r.run());
+            this.reactives.forEach(r => queueReactive(r));
         }
     }
 }
