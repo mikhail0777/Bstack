@@ -19,8 +19,20 @@ const patchRoute = (route) => {
 */
 const requestListener = function (req, res) {
     const { url, method } = req;
-    const route = patchRoute(url);
-    console.log("route: ", route);
+    const [pathOnly, queryString] = (url || "").split('?');
+    const route = patchRoute(pathOnly);
+    
+    // Parse query parameters
+    const query = {};
+    if (queryString) {
+        const params = new URLSearchParams(queryString);
+        for (const [key, val] of params.entries()) {
+            query[key] = val;
+        }
+    }
+    req.query = query;
+    
+    console.log("route: ", route, "query: ", query);
 
     if (!method || !METHODS[method]) {
         res.setHeader('Content-Type', "text/html");
