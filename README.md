@@ -59,6 +59,43 @@ Continue to replicate js-framework-benchmark tests:
 3. Paste the folder into krausest's `frameworks/non-keyed/`
 4. Follow krausest's instructions for benching individual frameworks and compiling results into the tables seen above.
 
+## Benchmark Analysis & Comparison
+
+Based on the run results against the industry-standard `js-framework-benchmark` suite, **Bstack** demonstrates elite execution speed and memory optimization:
+
+### 1. Performance (Duration in ms)
+* **Vanilla JS Match**: Bstack achieves a geometric mean score of **1.08** relative to vanilla JS, meaning it has only an **8%** overhead over raw DOM manipulation.
+* **Outperforming Svelte, Vue, and React**:
+  - **Svelte v4.0.0**: **1.22** geometric mean (Bstack is ~14% faster).
+  - **Vue v3.3.4**: **1.28** geometric mean (Bstack is ~20% faster).
+  - **React v18.2.0**: **1.68** geometric mean (Bstack is ~60% faster).
+* **Key Strengths**: Bstack is exceptionally fast at replacing and swapping rows (1.00 relative score) due to its flat DOM structure and lack of Virtual DOM reconciliation overhead.
+
+### 2. Memory Footprint (Allocation in MBs)
+* **Ultra-low Memory Overhead**: Bstack achieves a geometric mean memory slowdown of **1.55**, putting it in a close tie with Svelte (**1.44**) and comfortably beating Vue (**1.81**) and React (**2.51**).
+* **Efficiency**: By avoiding Virtual DOM node duplication, memory remains low even during heavy DOM updates (e.g. updating every 10th row).
+
+---
+
 ## Development Docs
 
-These will be published once, and if, the stack is completed. For now, referring to the playground example should provide enough insight to create basic applications.
+Bstack bridges a custom indentation-based template language with a fine-grained client-side reactive runtime.
+
+### 1. The Compilation Pipeline (Rust DSL)
+The compiler is written in Rust using the `Pest` parsing library. It parses two custom formats:
+* **`.jss` (Server Layout)**: Indentation-based markup defining the structure and components of a page.
+* **`.jsc` (Client Script)**: Reactive component script logic.
+
+The compiler generates two build artifacts from these files:
+* **Server Components (`.cjs`)**: Exported classes that extend `Component` and produce pre-rendered HTML on the server.
+* **Client Components (`.mjs`)**: Exported classes that run in the browser and handle reactivity and DOM binding.
+
+### 2. Client-Side Reactive Runtime
+Reactivity is fine-grained, utilizing a signal-like architecture:
+* **`StateObject`**: Holds a reactive value and tracks all dependent effects (`ReactiveObject`s).
+* **`ReactiveObject`**: Wraps functions that depend on reactive states. When the state changes, the effect is scheduled.
+* **Scheduler (Microtask Batching)**: Instead of executing effects synchronously (which causes layout thrashing), updates are queued in a global `Set` and flushed asynchronously at the end of the current microtask tick using `Promise.resolve().then()`.
+
+### 3. Dynamic Server-Side Rendering (SSR) & Hydration
+* **Dynamic Loading**: On every HTTP request, the route handler extracts context and query parameters, requiring the corresponding server component file dynamically to render the HTML.
+* **Hydration**: The server injects the client scripts. On page load, the client hydrator executes, rebuilding the reactive state bindings on the existing DOM nodes without doing full repaints.
