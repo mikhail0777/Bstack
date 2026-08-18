@@ -1,6 +1,6 @@
 # Description
 
-This is a project I started in June of 2023 because I thought it would be cool to have my own web dev stack and gain more insight to how these frameworks operated.
+This is a project I started in June of 2026 because I thought it would be cool to have my own web dev stack and gain more insight to how these frameworks operated.
 
 Currently, I am focusing on the frontend library, which is for building multi-page web applications. As of now, it supports CSR (client-side rendering) and SSG (static site generation), but I have plans to add SSR (server-side rendering) in the future. I also wish to create a more seemless dev experience with either JSX support (like Solid.js) or a custom compiled language (like Svelte), but I probably do not have that much time.
 
